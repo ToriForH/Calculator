@@ -1,17 +1,16 @@
 import javax.swing.*;
-import javax.swing.text.Caret;
 import java.awt.*;
 import java.awt.event.*;
 
 public class Calculator implements ActionListener{
-    private final JFrame frame;
-    private final JTextField action;
-    private final JTextField history;
-    private final JButton[] numberButtons = new JButton[10];
+    private final JFrame FRAME;
+    private final JTextField ACTION;
+    private final JTextField HISTORY;
+    private final JButton[] NUMBER_BUTTONS = new JButton[10];
     private JButton[] functionButtons = new JButton[9];
-    private final JButton addButton, subtractButton, multipleButton, divideButton;
-    private final JButton decimalButton, equalButton, negativeButton, deleteButton, clearButton;
-    private final JPanel panel;
+    private final JButton ADD_BUTTON, SUBTRACT_BUTTON, MULTIPLE_BUTTON, DIVIDE_BUTTON;
+    private final JButton DECIMAL_BUTTON, EQUAL_BUTTON, NEGATIVE_BUTTON, DELETE_BUTTON, CLEAR_BUTTON;
+    private final JPanel PANEL;
     private boolean equalsActed = false;
 
     private Font font = new Font("Impact", Font.PLAIN, 20);
@@ -22,48 +21,48 @@ public class Calculator implements ActionListener{
     private char operator;
 
     Calculator() {
-        frame = new JFrame("Calculator");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(315, 455);
-        frame.setLayout(null);
-        frame.getContentPane().setBackground(Color.decode("#fc90c6"));
+        FRAME = new JFrame("Calculator");
+        FRAME.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        FRAME.setSize(315, 455);
+        FRAME.setLayout(null);
+        FRAME.getContentPane().setBackground(Color.decode("#fc90c6"));
 
-        action = new JTextField();
-        action.setBounds(25, 25, 250, 40);
-        action.setFont(font);
-        action.setForeground(Color.decode("#73073d"));
-        action.setBackground(Color.decode("#c486a5"));
-        action.setCaretColor(Color.decode("#c486a5"));
-        action.setBorder(javax.swing.BorderFactory.createEmptyBorder());
-        action.setEditable(false);
+        ACTION = new JTextField();
+        ACTION.setBounds(25, 25, 250, 40);
+        ACTION.setFont(font);
+        ACTION.setForeground(Color.decode("#73073d"));
+        ACTION.setBackground(Color.decode("#c486a5"));
+        ACTION.setCaretColor(Color.decode("#c486a5"));
+        ACTION.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+        ACTION.setEditable(false);
 
-        history = new JTextField();
-        history.setBounds(25, 5, 250, 15);
-        history.setFont(smallFont);
-        history.setBackground(Color.decode("#fc90c6"));
-        history.setForeground(Color.decode("#cf277b"));
-        history.setCaretColor(Color.decode("#fc90c6"));
-        history.setBorder(javax.swing.BorderFactory.createEmptyBorder());
-        history.setEditable(false);
+        HISTORY = new JTextField();
+        HISTORY.setBounds(25, 5, 250, 15);
+        HISTORY.setFont(smallFont);
+        HISTORY.setBackground(Color.decode("#fc90c6"));
+        HISTORY.setForeground(Color.decode("#cf277b"));
+        HISTORY.setCaretColor(Color.decode("#fc90c6"));
+        HISTORY.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+        HISTORY.setEditable(false);
 
-        addButton = new JButton("+");
-        subtractButton = new JButton("-");
-        multipleButton = new JButton("*");
-        divideButton = new JButton("/");
-        decimalButton = new JButton(".");
-        equalButton = new JButton("=");
-        negativeButton = new JButton("(-)");
-        deleteButton = new JButton("DEL");
-        clearButton = new JButton("CLR");
-        functionButtons[0] = addButton;
-        functionButtons[1] = subtractButton;
-        functionButtons[2] = multipleButton;
-        functionButtons[3] = divideButton;
-        functionButtons[4] = decimalButton;
-        functionButtons[5] = equalButton;
-        functionButtons[6] = negativeButton;
-        functionButtons[7] = deleteButton;
-        functionButtons[8] = clearButton;
+        ADD_BUTTON = new JButton("+");
+        SUBTRACT_BUTTON = new JButton("-");
+        MULTIPLE_BUTTON = new JButton("*");
+        DIVIDE_BUTTON = new JButton("/");
+        DECIMAL_BUTTON = new JButton(".");
+        EQUAL_BUTTON = new JButton("=");
+        NEGATIVE_BUTTON = new JButton("(-)");
+        DELETE_BUTTON = new JButton("DEL");
+        CLEAR_BUTTON = new JButton("CLR");
+        functionButtons[0] = ADD_BUTTON;
+        functionButtons[1] = SUBTRACT_BUTTON;
+        functionButtons[2] = MULTIPLE_BUTTON;
+        functionButtons[3] = DIVIDE_BUTTON;
+        functionButtons[4] = DECIMAL_BUTTON;
+        functionButtons[5] = EQUAL_BUTTON;
+        functionButtons[6] = NEGATIVE_BUTTON;
+        functionButtons[7] = DELETE_BUTTON;
+        functionButtons[8] = CLEAR_BUTTON;
 
         for (JButton functionButton : functionButtons) {
             functionButton.addActionListener(this);
@@ -73,48 +72,48 @@ public class Calculator implements ActionListener{
             functionButton.setForeground(Color.decode("#e6127d"));
         }
 
-        for (int i = 0; i < numberButtons.length; i++) {
-            numberButtons[i] = new JButton(String.valueOf(i));
-            numberButtons[i].addActionListener(this);
-            numberButtons[i].setFont(font);
-            numberButtons[i].setFocusable(false);
-            numberButtons[i].setBackground(Color.decode("#f5c9df"));
-            numberButtons[i].setForeground(Color.decode("#e6127d"));
+        for (int i = 0; i < NUMBER_BUTTONS.length; i++) {
+            NUMBER_BUTTONS[i] = new JButton(String.valueOf(i));
+            NUMBER_BUTTONS[i].addActionListener(this);
+            NUMBER_BUTTONS[i].setFont(font);
+            NUMBER_BUTTONS[i].setFocusable(false);
+            NUMBER_BUTTONS[i].setBackground(Color.decode("#f5c9df"));
+            NUMBER_BUTTONS[i].setForeground(Color.decode("#e6127d"));
         }
 
-        negativeButton.setBounds(25, 350, 55, 40);
-        deleteButton.setBounds(90, 350, 90, 40);
-        clearButton.setBounds(185, 350, 90, 40);
+        NEGATIVE_BUTTON.setBounds(25, 350, 55, 40);
+        DELETE_BUTTON.setBounds(90, 350, 90, 40);
+        CLEAR_BUTTON.setBounds(185, 350, 90, 40);
 
-        panel = new JPanel();
-        panel.setBounds(25, 90, 250, 250);
-        panel.setLayout(new GridLayout(4, 4, 10, 10));
-        panel.setBackground(Color.decode("#db86b1"));
+        PANEL = new JPanel();
+        PANEL.setBounds(25, 90, 250, 250);
+        PANEL.setLayout(new GridLayout(4, 4, 10, 10));
+        PANEL.setBackground(Color.decode("#db86b1"));
 
-        panel.add(numberButtons[1]);
-        panel.add(numberButtons[2]);
-        panel.add(numberButtons[3]);
-        panel.add(addButton);
-        panel.add(numberButtons[4]);
-        panel.add(numberButtons[5]);
-        panel.add(numberButtons[6]);
-        panel.add(subtractButton);
-        panel.add(numberButtons[7]);
-        panel.add(numberButtons[8]);
-        panel.add(numberButtons[9]);
-        panel.add(multipleButton);
-        panel.add(decimalButton);
-        panel.add(numberButtons[0]);
-        panel.add(equalButton);
-        panel.add(divideButton);
+        PANEL.add(NUMBER_BUTTONS[1]);
+        PANEL.add(NUMBER_BUTTONS[2]);
+        PANEL.add(NUMBER_BUTTONS[3]);
+        PANEL.add(ADD_BUTTON);
+        PANEL.add(NUMBER_BUTTONS[4]);
+        PANEL.add(NUMBER_BUTTONS[5]);
+        PANEL.add(NUMBER_BUTTONS[6]);
+        PANEL.add(SUBTRACT_BUTTON);
+        PANEL.add(NUMBER_BUTTONS[7]);
+        PANEL.add(NUMBER_BUTTONS[8]);
+        PANEL.add(NUMBER_BUTTONS[9]);
+        PANEL.add(MULTIPLE_BUTTON);
+        PANEL.add(DECIMAL_BUTTON);
+        PANEL.add(NUMBER_BUTTONS[0]);
+        PANEL.add(EQUAL_BUTTON);
+        PANEL.add(DIVIDE_BUTTON);
 
-        frame.add(history);
-        frame.add(action);
-        frame.add(panel);
-        frame.add(negativeButton);
-        frame.add(deleteButton);
-        frame.add(clearButton);
-        frame.setVisible(true);
+        FRAME.add(HISTORY);
+        FRAME.add(ACTION);
+        FRAME.add(PANEL);
+        FRAME.add(NEGATIVE_BUTTON);
+        FRAME.add(DELETE_BUTTON);
+        FRAME.add(CLEAR_BUTTON);
+        FRAME.setVisible(true);
     }
 
     private double count(char operation, double n1, double n2) {
@@ -133,108 +132,108 @@ public class Calculator implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        for (JButton button : numberButtons) {
+        for (JButton button : NUMBER_BUTTONS) {
             if (e.getSource() == button) {
-                action.setText(action.getText().concat(button.getText()));
+                ACTION.setText(ACTION.getText().concat(button.getText()));
             }
         }
 
-        if (e.getSource() == decimalButton) {
-            action.setText(action.getText().concat(decimalButton.getText()));
+        if (e.getSource() == DECIMAL_BUTTON) {
+            ACTION.setText(ACTION.getText().concat(DECIMAL_BUTTON.getText()));
         }
 
-        if (e.getSource() == negativeButton) {
-            double temp = Double.parseDouble(action.getText());
+        if (e.getSource() == NEGATIVE_BUTTON) {
+            double temp = Double.parseDouble(ACTION.getText());
             temp *= -1;
-            action.setText(String.valueOf(temp));
+            ACTION.setText(String.valueOf(temp));
         }
 
-        if (e.getSource() == addButton) {
-            if(history.getText().isEmpty()) {
-                num1 = Double.parseDouble(action.getText());
-                history.setText(action.getText());
+        if (e.getSource() == ADD_BUTTON) {
+            if(HISTORY.getText().isEmpty()) {
+                num1 = Double.parseDouble(ACTION.getText());
+                HISTORY.setText(ACTION.getText());
             } else if(equalsActed) {
                 equalsActed = false;
-                history.setText(String.valueOf(num1));
+                HISTORY.setText(String.valueOf(num1));
             } else {
-                num1 = count(operator, num1, Double.parseDouble(action.getText()));
-                history.setText(history.getText().concat(action.getText()));
+                num1 = count(operator, num1, Double.parseDouble(ACTION.getText()));
+                HISTORY.setText(HISTORY.getText().concat(ACTION.getText()));
             }
-            history.setText(history.getText().concat(addButton.getText()));
-            action.setText("");
+            HISTORY.setText(HISTORY.getText().concat(ADD_BUTTON.getText()));
+            ACTION.setText("");
             operator = '+';
         }
 
-        if (e.getSource() == subtractButton) {
-            if(history.getText().isEmpty()) {
-                num1 = Double.parseDouble(action.getText());
-                history.setText(action.getText());
+        if (e.getSource() == SUBTRACT_BUTTON) {
+            if(HISTORY.getText().isEmpty()) {
+                num1 = Double.parseDouble(ACTION.getText());
+                HISTORY.setText(ACTION.getText());
             } else if(equalsActed) {
                 equalsActed = false;
-                history.setText(String.valueOf(num1));
+                HISTORY.setText(String.valueOf(num1));
             } else {
-                num1 = count(operator, num1, Double.parseDouble(action.getText()));
-                history.setText(history.getText().concat(action.getText()));
+                num1 = count(operator, num1, Double.parseDouble(ACTION.getText()));
+                HISTORY.setText(HISTORY.getText().concat(ACTION.getText()));
             }
-            history.setText(history.getText().concat(subtractButton.getText()));
-            action.setText("");
+            HISTORY.setText(HISTORY.getText().concat(SUBTRACT_BUTTON.getText()));
+            ACTION.setText("");
             operator = '-';
         }
 
-        if (e.getSource() == multipleButton) {
-            if(history.getText().isEmpty()) {
-                num1 = Double.parseDouble(action.getText());
-                history.setText(action.getText());
+        if (e.getSource() == MULTIPLE_BUTTON) {
+            if(HISTORY.getText().isEmpty()) {
+                num1 = Double.parseDouble(ACTION.getText());
+                HISTORY.setText(ACTION.getText());
             } else if(equalsActed) {
                 equalsActed = false;
-                history.setText(String.valueOf(num1));
+                HISTORY.setText(String.valueOf(num1));
             } else {
-                num1 = count(operator, num1, Double.parseDouble(action.getText()));
-                history.setText(history.getText().concat(action.getText()));
+                num1 = count(operator, num1, Double.parseDouble(ACTION.getText()));
+                HISTORY.setText(HISTORY.getText().concat(ACTION.getText()));
             }
-            history.setText(history.getText().concat(multipleButton.getText()));
-            action.setText("");
+            HISTORY.setText(HISTORY.getText().concat(MULTIPLE_BUTTON.getText()));
+            ACTION.setText("");
             operator = '*';
 
         }
 
-        if (e.getSource() == divideButton) {
-            if(history.getText().isEmpty()) {
-                num1 = Double.parseDouble(action.getText());
-                history.setText(action.getText());
+        if (e.getSource() == DIVIDE_BUTTON) {
+            if(HISTORY.getText().isEmpty()) {
+                num1 = Double.parseDouble(ACTION.getText());
+                HISTORY.setText(ACTION.getText());
             } else if(equalsActed) {
                 equalsActed = false;
-                history.setText(String.valueOf(num1));
+                HISTORY.setText(String.valueOf(num1));
             } else {
-                num1 = count(operator, num1, Double.parseDouble(action.getText()));
-                history.setText(history.getText().concat(action.getText()));
+                num1 = count(operator, num1, Double.parseDouble(ACTION.getText()));
+                HISTORY.setText(HISTORY.getText().concat(ACTION.getText()));
             }
-            history.setText(history.getText().concat(divideButton.getText()));
-            action.setText("");
+            HISTORY.setText(HISTORY.getText().concat(DIVIDE_BUTTON.getText()));
+            ACTION.setText("");
             operator = '/';
         }
 
-        if(e.getSource() == equalButton) {
+        if(e.getSource() == EQUAL_BUTTON) {
             equalsActed = true;
-            num2 = Double.parseDouble(action.getText());
-            history.setText(history.getText().concat(action.getText()).concat(equalButton.getText()));
+            num2 = Double.parseDouble(ACTION.getText());
+            HISTORY.setText(HISTORY.getText().concat(ACTION.getText()).concat(EQUAL_BUTTON.getText()));
 
             result = count(operator, num1, num2);
-            action.setText(String.valueOf(result));
+            ACTION.setText(String.valueOf(result));
             num1 = result;
             num2 = 0;
         }
 
-        if (e.getSource() == clearButton) {
-            action.setText("");
-            history.setText("");
+        if (e.getSource() == CLEAR_BUTTON) {
+            ACTION.setText("");
+            HISTORY.setText("");
             num1 = 0;
             num2 = 0;
         }
 
-        if (e.getSource() == deleteButton) {
-            String value = action.getText();
-            action.setText(value.substring(0, value.length() - 1));
+        if (e.getSource() == DELETE_BUTTON) {
+            String value = ACTION.getText();
+            ACTION.setText(value.substring(0, value.length() - 1));
         }
     }
 }
