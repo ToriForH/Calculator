@@ -7,14 +7,21 @@ public class Calculator implements ActionListener{
     private final JTextField ACTION;
     private final JTextField HISTORY;
     private final JButton[] NUMBER_BUTTONS = new JButton[10];
-    private JButton[] functionButtons = new JButton[9];
+    private final JButton[] FUNCTION_BUTTONS = new JButton[9];
     private final JButton ADD_BUTTON, SUBTRACT_BUTTON, MULTIPLE_BUTTON, DIVIDE_BUTTON;
     private final JButton DECIMAL_BUTTON, EQUAL_BUTTON, NEGATIVE_BUTTON, DELETE_BUTTON, CLEAR_BUTTON;
     private final JPanel PANEL;
     private boolean equalsActed = false;
 
-    private Font font = new Font("Impact", Font.PLAIN, 20);
-    private Font smallFont = new Font("Impact", Font.PLAIN, 15);
+    private final static Color BACKGROUND_COLOR = Color.decode("#fc90c6");
+    private final static Color BUTTON_BACKGROUND_COLOR = Color.decode("#f5c9df");
+    private final static Color BUTTON_COLOR = Color.decode("#e6127d");
+    private final static Color ACTION_BACKGROUND_COLOR = Color.decode("#c486a5");
+    private final static Color ACTION_TEXT_COLOR = Color.decode("#73073d");
+    private final static Color HISTORY_TEXT_COLOR = Color.decode("#cf277b");
+    private final static Color PANEL_BACKGROUND_COLOR = Color.decode("#db86b1");
+    private final static Font font = new Font("Impact", Font.PLAIN, 20);
+    private final static Font smallFont = new Font("Impact", Font.PLAIN, 15);
     private double num1 = 0;
     private double num2 = 0;
     private double result;
@@ -25,23 +32,24 @@ public class Calculator implements ActionListener{
         FRAME.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         FRAME.setSize(315, 455);
         FRAME.setLayout(null);
-        FRAME.getContentPane().setBackground(Color.decode("#fc90c6"));
+        FRAME.setResizable(false);
+        FRAME.getContentPane().setBackground(BACKGROUND_COLOR);
 
         ACTION = new JTextField();
         ACTION.setBounds(25, 25, 250, 40);
         ACTION.setFont(font);
-        ACTION.setForeground(Color.decode("#73073d"));
-        ACTION.setBackground(Color.decode("#c486a5"));
-        ACTION.setCaretColor(Color.decode("#c486a5"));
+        ACTION.setForeground(ACTION_TEXT_COLOR);
+        ACTION.setBackground(ACTION_BACKGROUND_COLOR);
+        ACTION.setCaretColor(ACTION_BACKGROUND_COLOR);
         ACTION.setBorder(javax.swing.BorderFactory.createEmptyBorder());
         ACTION.setEditable(false);
 
         HISTORY = new JTextField();
         HISTORY.setBounds(25, 5, 250, 15);
         HISTORY.setFont(smallFont);
-        HISTORY.setBackground(Color.decode("#fc90c6"));
-        HISTORY.setForeground(Color.decode("#cf277b"));
-        HISTORY.setCaretColor(Color.decode("#fc90c6"));
+        HISTORY.setBackground(BACKGROUND_COLOR);
+        HISTORY.setForeground(HISTORY_TEXT_COLOR);
+        HISTORY.setCaretColor(BACKGROUND_COLOR);
         HISTORY.setBorder(javax.swing.BorderFactory.createEmptyBorder());
         HISTORY.setEditable(false);
 
@@ -54,22 +62,22 @@ public class Calculator implements ActionListener{
         NEGATIVE_BUTTON = new JButton("(-)");
         DELETE_BUTTON = new JButton("DEL");
         CLEAR_BUTTON = new JButton("CLR");
-        functionButtons[0] = ADD_BUTTON;
-        functionButtons[1] = SUBTRACT_BUTTON;
-        functionButtons[2] = MULTIPLE_BUTTON;
-        functionButtons[3] = DIVIDE_BUTTON;
-        functionButtons[4] = DECIMAL_BUTTON;
-        functionButtons[5] = EQUAL_BUTTON;
-        functionButtons[6] = NEGATIVE_BUTTON;
-        functionButtons[7] = DELETE_BUTTON;
-        functionButtons[8] = CLEAR_BUTTON;
+        FUNCTION_BUTTONS[0] = ADD_BUTTON;
+        FUNCTION_BUTTONS[1] = SUBTRACT_BUTTON;
+        FUNCTION_BUTTONS[2] = MULTIPLE_BUTTON;
+        FUNCTION_BUTTONS[3] = DIVIDE_BUTTON;
+        FUNCTION_BUTTONS[4] = DECIMAL_BUTTON;
+        FUNCTION_BUTTONS[5] = EQUAL_BUTTON;
+        FUNCTION_BUTTONS[6] = NEGATIVE_BUTTON;
+        FUNCTION_BUTTONS[7] = DELETE_BUTTON;
+        FUNCTION_BUTTONS[8] = CLEAR_BUTTON;
 
-        for (JButton functionButton : functionButtons) {
+        for (JButton functionButton : FUNCTION_BUTTONS) {
             functionButton.addActionListener(this);
             functionButton.setFont(font);
             functionButton.setFocusable(false);
-            functionButton.setBackground(Color.decode("#f5c9df"));
-            functionButton.setForeground(Color.decode("#e6127d"));
+            functionButton.setBackground(BUTTON_BACKGROUND_COLOR);
+            functionButton.setForeground(BUTTON_COLOR);
         }
 
         for (int i = 0; i < NUMBER_BUTTONS.length; i++) {
@@ -77,8 +85,8 @@ public class Calculator implements ActionListener{
             NUMBER_BUTTONS[i].addActionListener(this);
             NUMBER_BUTTONS[i].setFont(font);
             NUMBER_BUTTONS[i].setFocusable(false);
-            NUMBER_BUTTONS[i].setBackground(Color.decode("#f5c9df"));
-            NUMBER_BUTTONS[i].setForeground(Color.decode("#e6127d"));
+            NUMBER_BUTTONS[i].setBackground(BUTTON_BACKGROUND_COLOR);
+            NUMBER_BUTTONS[i].setForeground(BUTTON_COLOR);
         }
 
         NEGATIVE_BUTTON.setBounds(25, 350, 55, 40);
@@ -88,7 +96,7 @@ public class Calculator implements ActionListener{
         PANEL = new JPanel();
         PANEL.setBounds(25, 90, 250, 250);
         PANEL.setLayout(new GridLayout(4, 4, 10, 10));
-        PANEL.setBackground(Color.decode("#db86b1"));
+        PANEL.setBackground(PANEL_BACKGROUND_COLOR);
 
         PANEL.add(NUMBER_BUTTONS[1]);
         PANEL.add(NUMBER_BUTTONS[2]);
